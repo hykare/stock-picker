@@ -1,14 +1,19 @@
 def stock_picker(array)
   profits = {}
- 
+
 for i in 0..array.length-1 do 
     for j in i..array.length-1 do
-        puts i.to_s<<", "<<j.to_s<<' -> '<<(array[j]-array[i]).to_s
         profits[[i,j]]=array[j]-array[i]
     end
 end
 
-  profits
+max = profits.reduce(profits.values[0]) do |accumulator, (k,v)|
+    v>accumulator ? v : accumulator
 end
 
-p stock_picker([17, 3, 6, 9, 15, 8, 6, 1, 10])
+p profits.select {|k, v| v==max}.keys[0]
+
+
+end
+
+p stock_picker([17, 3, 3, 9, 15, 8, 6, 11, 1])
